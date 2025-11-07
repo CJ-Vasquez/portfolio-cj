@@ -1,5 +1,22 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, Download, Code, Coffee, Sparkles, Mail } from 'lucide-react';
+import { 
+  ArrowDown, 
+  Download, 
+  Code, 
+  Coffee, 
+  Sparkles, 
+  Mail, 
+  Laptop,
+  Smartphone,
+  Database,
+  Globe,
+  Cpu,
+  Zap,
+  Palette,
+  Lightbulb,
+  Terminal,
+  Rocket
+} from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const creativeTexts = [
@@ -14,26 +31,52 @@ interface FloatingIconProps {
   delay?: number;
   x?: number;
   y?: number;
+  size?: number;
+  color?: string;
 }
 
-const FloatingIcon = ({ icon: Icon, delay = 0, x = 0, y = 0 }: FloatingIconProps) => (
+const FloatingIcon = ({ 
+  icon: Icon, 
+  delay = 0, 
+  x = 0, 
+  y = 0, 
+  size = 32,
+  color = "text-cyan-400"
+}: FloatingIconProps) => (
   <motion.div
-    className="absolute text-cyan-400/20"
-    initial={{ opacity: 0, scale: 0 }}
+    className={`fixed ${color}/60 z-10`}
+    initial={{ opacity: 0, scale: 0, rotate: -180 }}
     animate={{ 
-      opacity: [0, 1, 0],
-      scale: [0, 1, 0],
-      x: [x, x + 50, x + 100],
-      y: [y, y - 50, y - 100]
+      opacity: [0, 0.8, 0.4, 0.8, 0],
+      scale: [0, 1.2, 0.8, 1.2, 0],
+      rotate: [0, 180, 360, 540, 720],
+      x: [x, x + 80, x + 160, x + 240],
+      y: [y, y - 80, y - 160, y - 240]
     }}
     transition={{
-      duration: 4,
+      duration: 8,
       repeat: Infinity,
       delay: delay,
       ease: "easeInOut"
     }}
+    whileHover={{ 
+      scale: 1.5, 
+      opacity: 1,
+      transition: { duration: 0.2 }
+    }}
+    style={{ left: `${x}px`, top: `${y}px` }}
   >
-    <Icon size={24} />
+    <div className="relative">
+      <Icon size={size} />
+      {/* Glow effect */}
+      <motion.div 
+        className={`absolute inset-0 ${color}/20 blur-lg`}
+        animate={{ scale: [1, 1.5, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <Icon size={size} />
+      </motion.div>
+    </div>
   </motion.div>
 );
 
@@ -43,6 +86,8 @@ interface CreativeHeroSectionProps {
 
 export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionProps) {
   const [currentText, setCurrentText] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 });
   const { scrollY } = useScroll();
   
   // Parallax effects
@@ -57,46 +102,184 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Set initial size
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // Calculate uniform distribution positions
+  const getIconPosition = (index: number, total: number) => {
+    const cols = Math.ceil(Math.sqrt(total));
+    const rows = Math.ceil(total / cols);
+    const col = index % cols;
+    const row = Math.floor(index / cols);
+    
+    return {
+      x: (windowSize.width / (cols + 1)) * (col + 1) - 50,
+      y: (windowSize.height / (rows + 1)) * (row + 1) - 50,
+    };
+  };
+
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 animated-gradient opacity-10"></div>
       
-      {/* Floating geometric shapes */}
+      {/* Magic cursor trail */}
+      <motion.div
+        className="absolute w-4 h-4 rounded-full bg-cyan-400/50 pointer-events-none mix-blend-screen z-50"
+        animate={{
+          x: mousePos.x - 8,
+          y: mousePos.y - 8,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 500,
+          damping: 28
+        }}
+      />
+      
+      <motion.div
+        className="absolute w-8 h-8 rounded-full border-2 border-cyan-400/30 pointer-events-none z-40"
+        animate={{
+          x: mousePos.x - 16,
+          y: mousePos.y - 16,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 200,
+          damping: 20
+        }}
+      />
+      
+      {/* Enhanced floating geometric shapes */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{ y: y2 }}
       >
-        {[...Array(6)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-32 h-32 border border-cyan-400/10 rounded-full"
+            className={`absolute border-2 ${
+              i % 4 === 0 ? 'border-cyan-400/20 rounded-full' :
+              i % 4 === 1 ? 'border-purple-400/20 rounded-lg rotate-45' :
+              i % 4 === 2 ? 'border-green-400/20 rounded-none' :
+              'border-pink-400/20 rounded-full'
+            } ${
+              i % 3 === 0 ? 'w-24 h-24' :
+              i % 3 === 1 ? 'w-32 h-32' : 'w-40 h-40'
+            }`}
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${(i * 13 + 5) % 95}%`,
+              top: `${(i * 17 + 10) % 85}%`,
             }}
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.1, 0.3, 0.1],
-              rotate: [0, 180, 360],
+              scale: [1, 1.3, 0.8, 1.2, 1],
+              opacity: [0.1, 0.3, 0.1, 0.25, 0.1],
+              rotate: [0, 180, 360, 180, 0],
+              x: [0, 30, -20, 40, 0],
+              y: [0, -40, 20, -30, 0]
             }}
             transition={{
-              duration: 8 + i * 2,
+              duration: 12 + (i * 2),
               repeat: Infinity,
-              ease: "linear",
+              ease: "easeInOut",
+              delay: i * 0.5
             }}
           />
         ))}
       </motion.div>
 
-      {/* Floating Icons */}
-      <FloatingIcon icon={Code} delay={0} x={100} y={200} />
-      <FloatingIcon icon={Coffee} delay={1} x={300} y={150} />
-      <FloatingIcon icon={Sparkles} delay={2} x={200} y={300} />
+      {/* Floating Icons - Dynamically distributed uniformly across entire screen */}
+      {[
+        { icon: Code, size: 36, color: "text-cyan-400", delay: 0 },
+        { icon: Laptop, size: 32, color: "text-purple-400", delay: 1 },
+        { icon: Database, size: 28, color: "text-green-400", delay: 2 },
+        { icon: Globe, size: 34, color: "text-blue-400", delay: 3 },
+        { icon: Smartphone, size: 30, color: "text-pink-400", delay: 1.5 },
+        { icon: Terminal, size: 32, color: "text-yellow-400", delay: 2.5 },
+        { icon: Cpu, size: 28, color: "text-red-400", delay: 0.8 },
+        { icon: Zap, size: 30, color: "text-orange-400", delay: 3.2 },
+        { icon: Palette, size: 26, color: "text-indigo-400", delay: 1.8 },
+        { icon: Lightbulb, size: 28, color: "text-amber-400", delay: 2.8 },
+        { icon: Rocket, size: 34, color: "text-emerald-400", delay: 4 },
+        { icon: Coffee, size: 30, color: "text-orange-300", delay: 0.5 },
+        { icon: Sparkles, size: 24, color: "text-violet-400", delay: 3.8 },
+        { icon: Code, size: 30, color: "text-teal-400", delay: 5 },
+        { icon: Terminal, size: 28, color: "text-lime-400", delay: 6 },
+      ].map((item, index) => {
+        const position = getIconPosition(index, 15);
+        return (
+          <FloatingIcon
+            key={`${item.icon.name}-${index}`}
+            icon={item.icon}
+            delay={item.delay}
+            x={position.x}
+            y={position.y}
+            size={item.size}
+            color={item.color}
+          />
+        );
+      })}
+
+      {/* Code snippets floating effect - Uniform distribution */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        {[
+          {text: 'const', x: 120, y: 150},
+          {text: 'function', x: 320, y: 200},
+          {text: 'return', x: 520, y: 180},
+          {text: '<div>', x: 720, y: 160},
+          {text: '{}', x: 920, y: 190},
+          {text: '=>', x: 1120, y: 170},
+          {text: 'async', x: 220, y: 400},
+          {text: 'await', x: 420, y: 420},
+          {text: 'useState', x: 620, y: 380},
+          {text: 'useEffect', x: 820, y: 410},
+        ].map((item, i) => (
+          <motion.div
+            key={item.text}
+            className={`absolute text-sm font-mono font-bold ${
+              i % 3 === 0 ? 'text-cyan-400/40' :
+              i % 3 === 1 ? 'text-purple-400/40' : 'text-green-400/40'
+            }`}
+            style={{
+              left: `${item.x}px`,
+              top: `${item.y}px`,
+            }}
+            animate={{
+              y: [0, -200, -400],
+              opacity: [0, 0.6, 0],
+              rotate: [0, 10, -5, 0]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              delay: i * 1.2,
+              ease: "easeOut"
+            }}
+          >
+            {item.text}
+          </motion.div>
+        ))}
+      </div>
 
       <motion.div 
         className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
@@ -117,10 +300,12 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
           {/* Animated border */}
           <div className="absolute inset-0 rounded-full animated-gradient p-1">
             <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center border-4 border-slate-800">
-              {/* Placeholder - reemplaza con tu imagen */}
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-cyan-400 to-purple-600 flex items-center justify-center text-2xl font-bold text-white">
-                TU
-              </div>
+              {/* Imagen de perfil */}
+              <img 
+                src="/images/ciro.PNG" 
+                alt="CJ Vásquez" 
+                className="w-full h-full rounded-full object-cover"
+              />
             </div>
           </div>
           
@@ -157,7 +342,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
                 backgroundSize: "200% 200%"
               }}
             >
-              Tu Nombre
+              CJ Vásquez
             </motion.span>
           </h1>
         </motion.div>

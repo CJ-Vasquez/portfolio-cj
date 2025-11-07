@@ -38,11 +38,7 @@ export function ScrollProgress() {
     <>
       {/* Progress Bar */}
       <motion.div
-        className={`fixed top-0 left-0 right-0 h-1 z-50 origin-left ${
-          state.theme === 'dark' 
-            ? 'bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500' 
-            : 'bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600'
-        }`}
+        className="fixed top-0 left-0 right-0 h-1 z-50 origin-left bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"
         style={{ scaleX }}
       />
 
@@ -66,7 +62,7 @@ export function ScrollProgress() {
               cx="50"
               cy="50"
               r="40"
-              stroke={state.theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}
+              stroke="rgba(255, 255, 255, 0.1)"
               strokeWidth="8"
               fill="none"
             />
@@ -99,11 +95,7 @@ export function ScrollProgress() {
           {/* Back to Top Button */}
           <motion.button
             onClick={scrollToTop}
-            className={`absolute inset-2 rounded-full flex items-center justify-center transition-all duration-300 ${
-              state.theme === 'dark'
-                ? 'bg-gray-900/80 hover:bg-gray-800/80 text-white'
-                : 'bg-white/80 hover:bg-gray-100/80 text-gray-900'
-            } backdrop-blur-sm border border-gray-200/20 hover:scale-110 active:scale-95`}
+            className="absolute inset-2 rounded-full flex items-center justify-center transition-all duration-300 bg-gray-900/80 hover:bg-gray-800/80 text-white backdrop-blur-sm border border-gray-200/20 hover:scale-110 active:scale-95"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -124,9 +116,7 @@ export function ScrollProgress() {
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 state.activeSection === section
                   ? 'bg-gradient-to-r from-cyan-400 to-purple-600 scale-125'
-                  : state.theme === 'dark'
-                    ? 'bg-gray-600 hover:bg-gray-500'
-                    : 'bg-gray-400 hover:bg-gray-500'
+                  : 'bg-gray-600 hover:bg-gray-500'
               }`}
               whileHover={{ scale: 1.3 }}
               initial={{ opacity: 0, x: 50 }}

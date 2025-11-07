@@ -5,8 +5,6 @@ import type { ReactNode } from 'react';
 interface PortfolioState {
   activeSection: string;
   isLoading: boolean;
-  theme: 'dark' | 'light' | 'auto';
-  effectiveTheme: 'dark' | 'light';
   animations: {
     reduceMotion: boolean;
     particlesEnabled: boolean;
@@ -28,8 +26,6 @@ interface PortfolioState {
 type PortfolioAction =
   | { type: 'SET_ACTIVE_SECTION'; payload: string }
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_THEME'; payload: 'dark' | 'light' | 'auto' }
-  | { type: 'SET_EFFECTIVE_THEME'; payload: 'dark' | 'light' }
   | { type: 'TOGGLE_ANIMATIONS'; payload: Partial<PortfolioState['animations']> }
   | { type: 'UPDATE_PERFORMANCE'; payload: Partial<PortfolioState['performance']> }
   | { type: 'TOGGLE_UI'; payload: Partial<PortfolioState['ui']> };
@@ -38,8 +34,6 @@ type PortfolioAction =
 const initialState: PortfolioState = {
   activeSection: 'hero',
   isLoading: false,
-  theme: 'dark',
-  effectiveTheme: 'dark',
   animations: {
     reduceMotion: false,
     particlesEnabled: true,
@@ -65,12 +59,6 @@ function portfolioReducer(state: PortfolioState, action: PortfolioAction): Portf
     
     case 'SET_LOADING':
       return { ...state, isLoading: action.payload };
-    
-    case 'SET_THEME':
-      return { ...state, theme: action.payload };
-    
-    case 'SET_EFFECTIVE_THEME':
-      return { ...state, effectiveTheme: action.payload };
     
     case 'TOGGLE_ANIMATIONS':
       return {
@@ -102,7 +90,6 @@ interface PortfolioContextType {
   actions: {
     setActiveSection: (section: string) => void;
     setLoading: (loading: boolean) => void;
-    setTheme: (theme: 'dark' | 'light' | 'auto') => void;
     toggleAnimations: (animations: Partial<PortfolioState['animations']>) => void;
     updatePerformance: (performance: Partial<PortfolioState['performance']>) => void;
     toggleUI: (ui: Partial<PortfolioState['ui']>) => void;
@@ -127,35 +114,6 @@ export function PortfolioProvider({ children }: PortfolioProviderProps) {
 
     setLoading: useCallback((loading: boolean) => {
       dispatch({ type: 'SET_LOADING', payload: loading });
-    }, []),
-
-    setTheme: useCallback((theme: 'dark' | 'light' | 'auto') => {
-      dispatch({ type: 'SET_THEME', payload: theme });
-      
-      // Auto-detect system theme if needed
-      if (theme === 'auto') {
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        dispatch({ 
-          type: 'SET_EFFECTIVE_THEME', 
-          payload: mediaQuery.matches ? 'dark' : 'light' 
-        });
-        
-        // Listen for system theme changes
-        const handleChange = (e: MediaQueryListEvent) => {
-          dispatch({ 
-            type: 'SET_EFFECTIVE_THEME', 
-            payload: e.matches ? 'dark' : 'light' 
-          });
-        };
-        
-        mediaQuery.addEventListener('change', handleChange);
-        return () => mediaQuery.removeEventListener('change', handleChange);
-      } else {
-        dispatch({ type: 'SET_EFFECTIVE_THEME', payload: theme });
-      }
-      
-      // Save to localStorage
-      localStorage.setItem('portfolio-theme', theme);
     }, []),
 
     toggleAnimations: useCallback((animations: Partial<PortfolioState['animations']>) => {
@@ -223,12 +181,7 @@ export function usePortfolioInit() {
 
   React.useEffect(() => {
     // Load saved preferences
-    const savedTheme = localStorage.getItem('portfolio-theme') as 'dark' | 'light' | 'auto' | null;
     const savedAnimations = localStorage.getItem('portfolio-animations');
-
-    if (savedTheme) {
-      actions.setTheme(savedTheme);
-    }
 
     if (savedAnimations) {
       try {

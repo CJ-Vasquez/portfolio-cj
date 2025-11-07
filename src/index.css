@@ -292,13 +292,6 @@ body {
   }
 }
 
-/* Dark mode optimizations */
-@media (prefers-color-scheme: dark) {
-  .glass-card {
-    background: rgba(15, 23, 42, 0.8);
-  }
-}
-
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *,
