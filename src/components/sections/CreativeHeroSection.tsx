@@ -1,21 +1,8 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   ArrowDown, 
   Download, 
-  Code, 
-  Coffee, 
-  Sparkles, 
   Mail, 
-  Laptop,
-  Smartphone,
-  Database,
-  Globe,
-  Cpu,
-  Zap,
-  Palette,
-  Lightbulb,
-  Terminal,
-  Rocket,
   Github,
   Linkedin,
   Twitter,
@@ -30,59 +17,7 @@ const creativeTexts = [
   "Donde la creatividad se encuentra con la tecnología"
 ];
 
-interface FloatingIconProps {
-  icon: React.ComponentType<{ size?: number }>;
-  delay?: number;
-  x?: number;
-  y?: number;
-  size?: number;
-  color?: string;
-}
 
-const FloatingIcon = ({ 
-  icon: Icon, 
-  delay = 0, 
-  x = 0, 
-  y = 0, 
-  size = 32,
-  color = "text-cyan-400"
-}: FloatingIconProps) => (
-  <motion.div
-    className={`fixed ${color}/60 z-10`}
-    initial={{ opacity: 0, scale: 0, rotate: -180 }}
-    animate={{ 
-      opacity: [0, 0.8, 0.4, 0.8, 0],
-      scale: [0, 1.2, 0.8, 1.2, 0],
-      rotate: [0, 180, 360, 540, 720],
-      x: [x, x + 80, x + 160, x + 240],
-      y: [y, y - 80, y - 160, y - 240]
-    }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      delay: delay,
-      ease: "easeInOut"
-    }}
-    whileHover={{ 
-      scale: 1.5, 
-      opacity: 1,
-      transition: { duration: 0.2 }
-    }}
-    style={{ left: `${x}px`, top: `${y}px` }}
-  >
-    <div className="relative">
-      <Icon size={size} />
-      {/* Glow effect */}
-      <motion.div 
-        className={`absolute inset-0 ${color}/20 blur-lg`}
-        animate={{ scale: [1, 1.5, 1] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <Icon size={size} />
-      </motion.div>
-    </div>
-  </motion.div>
-);
 
 interface CreativeHeroSectionProps {
   onOpenContactModal?: () => void;
@@ -92,11 +27,6 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
   const [currentText, setCurrentText] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 });
-  const { scrollY } = useScroll();
-  
-  // Parallax effects
-  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -176,7 +106,6 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
       {/* Enhanced floating geometric shapes */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
-        style={{ y: y2 }}
       >
         {[...Array(12)].map((_, i) => (
           <motion.div
@@ -210,38 +139,6 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
           />
         ))}
       </motion.div>
-
-      {/* Floating Icons - Dynamically distributed uniformly across entire screen */}
-      {[
-        { icon: Code, size: 36, color: "text-cyan-400", delay: 0 },
-        { icon: Laptop, size: 32, color: "text-purple-400", delay: 1 },
-        { icon: Database, size: 28, color: "text-green-400", delay: 2 },
-        { icon: Globe, size: 34, color: "text-blue-400", delay: 3 },
-        { icon: Smartphone, size: 30, color: "text-pink-400", delay: 1.5 },
-        { icon: Terminal, size: 32, color: "text-yellow-400", delay: 2.5 },
-        { icon: Cpu, size: 28, color: "text-red-400", delay: 0.8 },
-        { icon: Zap, size: 30, color: "text-orange-400", delay: 3.2 },
-        { icon: Palette, size: 26, color: "text-indigo-400", delay: 1.8 },
-        { icon: Lightbulb, size: 28, color: "text-amber-400", delay: 2.8 },
-        { icon: Rocket, size: 34, color: "text-emerald-400", delay: 4 },
-        { icon: Coffee, size: 30, color: "text-orange-300", delay: 0.5 },
-        { icon: Sparkles, size: 24, color: "text-violet-400", delay: 3.8 },
-        { icon: Code, size: 30, color: "text-teal-400", delay: 5 },
-        { icon: Terminal, size: 28, color: "text-lime-400", delay: 6 },
-      ].map((item, index) => {
-        const position = getIconPosition(index, 15);
-        return (
-          <FloatingIcon
-            key={`${item.icon.name}-${index}`}
-            icon={item.icon}
-            delay={item.delay}
-            x={position.x}
-            y={position.y}
-            size={item.size}
-            color={item.color}
-          />
-        );
-      })}
 
       {/* Code snippets floating effect - Uniform distribution */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
@@ -550,7 +447,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             <Github className="w-6 h-6" />
           </motion.a>
           <motion.a
-            href="https://linkedin.com/in/tu-perfil"
+            href="https://linkedin.com/in/cj-vasquez"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
@@ -560,7 +457,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             <Linkedin className="w-6 h-6" />
           </motion.a>
           <motion.a
-            href="https://twitter.com/tu-perfil"
+            href="https://twitter.com/CJVasquezDev"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
@@ -570,7 +467,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             <Twitter className="w-6 h-6" />
           </motion.a>
           <motion.a
-            href="https://tu-portfolio-personal.com"
+            href="https://cj-vasquez.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
