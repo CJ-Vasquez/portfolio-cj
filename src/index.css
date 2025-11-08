@@ -40,6 +40,49 @@
       background-position: 0% 50%;
     }
   }
+
+  @keyframes pulseGradient {
+    0% {
+      opacity: 0.3;
+      background-position: 0% 0%;
+    }
+    50% {
+      opacity: 0.5;
+      background-position: 50% 50%;
+    }
+    100% {
+      opacity: 0.3;
+      background-position: 100% 100%;
+    }
+  }
+
+  @keyframes scanline {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 100%;
+    }
+  }
+
+  .card-holographic {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+
+  .card-holographic:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+  }
+
+  .scanline-effect {
+    background: linear-gradient(to bottom, 
+      transparent 50%, 
+      rgba(136, 242, 255, 0.1) 50%
+    );
+    background-size: 100% 4px;
+    animation: scanline 1.5s linear infinite;
+  }
   
   --color-text-primary: #F1F5F9;
   --color-text-secondary: #CBD5E1;

@@ -15,7 +15,11 @@ import {
   Palette,
   Lightbulb,
   Terminal,
-  Rocket
+  Rocket,
+  Github,
+  Linkedin,
+  Twitter,
+  ExternalLink
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -91,7 +95,6 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
   const { scrollY } = useScroll();
   
   // Parallax effects
-  const y1 = useTransform(scrollY, [0, 300], [0, -50]);
   const y2 = useTransform(scrollY, [0, 300], [0, -100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
@@ -305,17 +308,13 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
           <motion.div
             whileHover={{ 
               scale: 1.05,
-              rotateX: 0,
-              rotateY: 0,
               transition: {
                 duration: 0.3,
                 ease: "easeOut"
               }
             }}
-            className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-xl cursor-pointer"
+            className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-xl cursor-pointer card-holographic"
             style={{
-              transformStyle: "preserve-3d",
-              transform: "rotateX(0deg) rotateY(0deg)",
               transformOrigin: "center center"
             }}
             whileInView={{
@@ -392,20 +391,12 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
 
                 {/* Holographic Overlay */}
                 <div
-                  className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10"
-                  style={{
-                    animation: "pulseGradient 3s infinite alternate"
-                  }}
+                  className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10 animate-pulse-gradient"
                 />
 
                 {/* Scanline Effect */}
                 <div
-                  className="absolute inset-0"
-                  style={{
-                    background: "linear-gradient(to bottom, transparent 50%, rgba(136, 242, 255, 0.1) 50%)",
-                    backgroundSize: "100% 4px",
-                    animation: "scanline 1.5s linear infinite"
-                  }}
+                  className="absolute inset-0 scanline-effect"
                 />
               </div>
             </div>
@@ -539,6 +530,55 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
               <span>Descargar CV</span>
             </span>
           </motion.button>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4"
+        >
+          <motion.a
+            href="https://github.com/CJ-Vasquez"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            whileHover={{ x: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Github className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="https://linkedin.com/in/tu-perfil"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            whileHover={{ x: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Linkedin className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="https://twitter.com/tu-perfil"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            whileHover={{ x: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Twitter className="w-6 h-6" />
+          </motion.a>
+          <motion.a
+            href="https://tu-portfolio-personal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            whileHover={{ x: -5 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ExternalLink className="w-6 h-6" />
+          </motion.a>
         </motion.div>
 
         {/* Scroll Indicator */}
