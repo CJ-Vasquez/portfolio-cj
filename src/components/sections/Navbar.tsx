@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X, Code, Home, User, Briefcase, Mail, Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { usePortfolio } from '../../context/PortfolioContext';
@@ -17,6 +17,17 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { state, actions } = usePortfolio();
   const { scrollToSection } = useSmoothScroll();
+  const { scrollY } = useScroll();
+  
+  // Transform scrollY into opacity and y position
+  const navbarOpacity = useTransform(scrollY, 
+    [0, 100, 200], 
+    [0, 0.8, 1]
+  );
+  const navbarY = useTransform(scrollY,
+    [0, 100, 200],
+    [-20, -10, 0]
+  );
 
   useEffect(() => {
     if (isOpen) {
@@ -51,6 +62,7 @@ export function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+        style={{ opacity: navbarOpacity, translateY: navbarY }}
         className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-4 py-2 sm:py-4"
         role="navigation"
         aria-label="Navegación principal"

@@ -285,41 +285,131 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
         className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         style={{ opacity }}
       >
-        {/* Profile Image with Creative Frame */}
+        {/* Holographic Profile Card */}
         <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
           transition={{ 
             type: "spring", 
             stiffness: 260, 
             damping: 20,
             delay: 0.2 
           }}
-          className="relative mx-auto mb-8 w-32 h-32 sm:w-40 sm:h-40"
+          className="relative mx-auto mb-12 group flex items-center justify-center"
+          style={{
+            perspective: "1000px",
+            transformStyle: "preserve-3d"
+          }}
         >
-          {/* Animated border */}
-          <div className="absolute inset-0 rounded-full animated-gradient p-1">
-            <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center border-4 border-slate-800">
-              {/* Imagen de perfil */}
-              <img 
-                src="/images/ciro.PNG" 
-                alt="CJ Vásquez" 
-                className="w-full h-full rounded-full object-cover"
-              />
-            </div>
-          </div>
-          
-          {/* Floating status indicator */}
+          {/* Card Container */}
           <motion.div
-            className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-slate-900 flex items-center justify-center"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            whileHover={{ 
+              scale: 1.05,
+              rotateX: 0,
+              rotateY: 0,
+              transition: {
+                duration: 0.3,
+                ease: "easeOut"
+              }
+            }}
+            className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-xl cursor-pointer"
+            style={{
+              transformStyle: "preserve-3d",
+              transform: "rotateX(0deg) rotateY(0deg)",
+              transformOrigin: "center center"
+            }}
+            whileInView={{
+              rotateX: [0, 10, 0, -10, 0],
+              rotateY: [0, 15, 0, -15, 0],
+              z: [0, 20, 0, 20, 0]
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: [0.6, 0.05, -0.01, 0.9]
+            }}
           >
+            {/* Holographic Background with enhanced effects */}
             <motion.div
-              className="w-3 h-3 bg-white rounded-full"
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
+              className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/30 via-purple-500/30 to-pink-500/30"
+              style={{
+                backgroundSize: "400% 400%",
+                filter: "blur(4px)",
+                transformStyle: "preserve-3d",
+                transform: "translateZ(-10px)"
+              }}
+              animate={{
+                backgroundPosition: ["0% 0%", "100% 0%", "100% 100%", "0% 100%"],
+                scale: [1, 1.05, 1, 1.05],
+                opacity: [0.5, 0.7, 0.5, 0.7]
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "linear"
+              }}
             />
+
+            {/* Card Frame */}
+            <div className="absolute inset-[2px] rounded-xl bg-slate-900/90 backdrop-blur-sm p-1 overflow-hidden">
+              {/* Enhanced Rainbow Border with 3D effect */}
+              <motion.div 
+                className="absolute inset-0 rounded-xl overflow-hidden"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-50"
+                  style={{ 
+                    filter: "blur(4px)",
+                    transformStyle: "preserve-3d",
+                    transform: "translateZ(-5px)"
+                  }}
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.div>
+
+              {/* Profile Image Container with Depth */}
+              <div 
+                className="relative w-full h-full rounded-lg overflow-hidden"
+                style={{ 
+                  transform: "translateZ(10px)"
+                }}
+              >
+                <img 
+                  src="/images/ciro.PNG" 
+                  alt="CJ Vásquez" 
+                  className="w-full h-full object-cover rounded-lg"
+                />
+
+                {/* Holographic Overlay */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10"
+                  style={{
+                    animation: "pulseGradient 3s infinite alternate"
+                  }}
+                />
+
+                {/* Scanline Effect */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(to bottom, transparent 50%, rgba(136, 242, 255, 0.1) 50%)",
+                    backgroundSize: "100% 4px",
+                    animation: "scanline 1.5s linear infinite"
+                  }}
+                />
+              </div>
+            </div>
+
           </motion.div>
         </motion.div>
 
@@ -404,7 +494,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
           <motion.button
             onClick={scrollToProjects}
@@ -456,20 +546,28 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          style={{ y: y1 }}
+          className="mt-20 mb-8 flex justify-center"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center space-y-2 text-slate-400"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity,
+              ease: "easeInOut" 
+            }}
+            className="flex flex-col items-center space-y-3 text-slate-400/80 hover:text-slate-300 transition-colors group cursor-pointer"
+            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <span className="text-sm">Scroll para descubrir</span>
-            <div className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center">
+            <span className="text-sm font-medium tracking-wide">Scroll para descubrir</span>
+            <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center group-hover:border-slate-300 transition-colors">
               <motion.div
-                animate={{ y: [0, 16, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-1 h-3 bg-slate-400 rounded-full mt-2"
+                animate={{ y: [0, 12, 0] }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="w-1.5 h-3 bg-current rounded-full mt-2 group-hover:bg-slate-300 transition-colors"
               />
             </div>
           </motion.div>
