@@ -18,10 +18,20 @@
   --color-bg-primary: #0F172A;
   --color-bg-secondary: #1E293B;
   --color-bg-card: #334155;
+  
+  /* Colores de texto */
+  --color-text-primary: #F1F5F9;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted: #94A3B8;
+  
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, #0EA5E9 0%, #8B5CF6 100%);
+  --gradient-secondary: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
 }
 
 @layer utilities {
-  .bg-300% {
+  .bg-size-300 {
     background-size: 300% auto;
   }
 
@@ -83,27 +93,6 @@
     background-size: 100% 4px;
     animation: scanline 1.5s linear infinite;
   }
-  
-  --color-text-primary: #F1F5F9;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted: #94A3B8;
-  
-  /* Gradientes */
-  --gradient-primary: linear-gradient(135deg, #0EA5E9 0%, #8B5CF6 100%);
-  --gradient-secondary: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
-  --gradient-glass: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
-  
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color-scheme: dark;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
-  
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -117,6 +106,15 @@ body {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
   overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: dark;
+  color: var(--color-text-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {

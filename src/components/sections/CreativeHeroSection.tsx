@@ -26,7 +26,6 @@ interface CreativeHeroSectionProps {
 export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionProps) {
   const [currentText, setCurrentText] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,32 +39,12 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
       setMousePos({ x: e.clientX, y: e.clientY });
     };
     
-    const handleResize = () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-    
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Set initial size
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  // Calculate uniform distribution positions
-  const getIconPosition = (index: number, total: number) => {
-    const cols = Math.ceil(Math.sqrt(total));
-    const rows = Math.ceil(total / cols);
-    const col = index % cols;
-    const row = Math.floor(index / cols);
-    
-    return {
-      x: (windowSize.width / (cols + 1)) * (col + 1) - 50,
-      y: (windowSize.height / (rows + 1)) * (row + 1) - 50,
-    };
-  };
 
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -183,7 +162,9 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
 
       <motion.div 
         className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-        style={{ opacity }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
       >
         {/* Holographic Profile Card */}
         <motion.div
@@ -356,7 +337,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
               duration: 0.5,
               ease: [0.4, 0, 0.2, 1]
             }}
-            className="text-xl sm:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-300% animate-gradient"
+            className="text-xl sm:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-size-300 animate-gradient"
           >
             {creativeTexts[currentText]}
           </motion.p>
