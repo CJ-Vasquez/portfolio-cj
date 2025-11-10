@@ -3,77 +3,92 @@ import { Play, Pause, VolumeX } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
 export function MusicPlayer() {
-  const [isMuted, setIsMuted] = useState(false); // Empieza desmutado
+  const [isMuted, setIsMuted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const hasTriedAutoplay = useRef(false);
 
-  // Auto-play al cargar la página
   useEffect(() => {
-    const attemptAutoplay = () => {
-      if (audioRef.current) {
+    if (hasTriedAutoplay.current || !audioRef.current) return;
+    
+    const tryPlay = async () => {
+      if (!audioRef.current) return;
+      
+      try {
+        audioRef.current.volume = 0.1;
         audioRef.current.muted = false;
-        audioRef.current.volume = 0.1; // Volumen al 10% para no molestar
-        
-        audioRef.current.play()
-          .then(() => {
-            setIsPlaying(true);
-            setIsMuted(false);
-          })
-          .catch((err) => {
-    // Si el navegador bloquea el autoplay, intentar con interacción del usuario
-    console.log('Autoplay bloqueado:', err.message);
-
-
-            
-            const handleInteraction = () => {
-              if (audioRef.current && !isPlaying) {
-                audioRef.current.play()
-                  .then(() => {
-                    setIsPlaying(true);
-                    setIsMuted(false);
-                  })
-                  .catch(console.error);
-              }
-              // Remover listeners después de la primera interacción
-              document.removeEventListener('click', handleInteraction);
-              document.removeEventListener('keydown', handleInteraction);
-            };
-
-            document.addEventListener('click', handleInteraction, { once: true });
-            document.addEventListener('keydown', handleInteraction, { once: true });
-          });
+        await audioRef.current.play();
+        setIsPlaying(true);
+        setIsMuted(false);
+        console.log('✅ Música iniciada automáticamente');
+        hasTriedAutoplay.current = true;
+      } catch (err) {
+        console.log('⏸️ Autoplay bloqueado, esperando interacción del usuario');
       }
     };
 
-    // Intentar reproducir después de un pequeño delay
-    const timer = setTimeout(attemptAutoplay, 500);
-    
-    return () => clearTimeout(timer);
+    // Intentar inmediatamente
+    setTimeout(tryPlay, 300);
+
+    // Handler global para cualquier interacción
+    const handleUserInteraction = async () => {
+      if (hasTriedAutoplay.current || !audioRef.current) return;
+      
+      try {
+        audioRef.current.volume = 0.1;
+        audioRef.current.muted = false;
+        await audioRef.current.play();
+        setIsPlaying(true);
+        setIsMuted(false);
+        console.log('✅ Música iniciada con interacción del usuario');
+        hasTriedAutoplay.current = true;
+        
+        // Limpiar listeners
+        cleanup();
+      } catch (err) {
+        console.error('Error al reproducir:', err);
+      }
+    };
+
+    // Agregar múltiples listeners
+    const events = ['click', 'scroll', 'touchstart', 'keydown'];
+    events.forEach(event => {
+      window.addEventListener(event, handleUserInteraction, { once: true, capture: true });
+    });
+
+    const cleanup = () => {
+      events.forEach(event => {
+        window.removeEventListener(event, handleUserInteraction, { capture: true });
+      });
+    };
+
+    return cleanup;
   }, []);
 
-  const togglePlayPause = (e: React.MouseEvent) => {
+  const togglePlayPause = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
     if (!audioRef.current) return;
     
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.muted = false;
-      setIsMuted(false);
-      audioRef.current.play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch((err) => {
-          console.error('Error playing audio:', err);
-        });
+    try {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.volume = 0.1;
+        audioRef.current.muted = false;
+        await audioRef.current.play();
+        setIsPlaying(true);
+        setIsMuted(false);
+        hasTriedAutoplay.current = true;
+      }
+    } catch (err) {
+      console.error('Error en play/pause:', err);
     }
   };
 
-  const toggleMute = (e: React.MouseEvent) => {
+  const toggleMute = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
@@ -84,11 +99,14 @@ export function MusicPlayer() {
     setIsMuted(newMutedState);
     
     if (!newMutedState && !isPlaying) {
-      audioRef.current.play()
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(console.error);
+      try {
+        audioRef.current.volume = 0.1;
+        await audioRef.current.play();
+        setIsPlaying(true);
+        hasTriedAutoplay.current = true;
+      } catch (err) {
+        console.error('Error al desmutear:', err);
+      }
     }
   };
 
@@ -102,14 +120,12 @@ export function MusicPlayer() {
         <source src="/music/background-music.mp3" type="audio/mpeg" />
       </audio>
 
-      {/* Compact music controls */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
         className="fixed top-6 right-6 z-50 flex items-center gap-1.5"
       >
-        {/* Play/Pause button */}
         <motion.button
           onClick={togglePlayPause}
           whileHover={{ x: -5 }}
@@ -124,7 +140,6 @@ export function MusicPlayer() {
           )}
         </motion.button>
 
-        {/* Mute button */}
         <motion.button
           onClick={toggleMute}
           whileHover={{ x: -5 }}
