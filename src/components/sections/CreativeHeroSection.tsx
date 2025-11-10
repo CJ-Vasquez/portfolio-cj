@@ -5,19 +5,16 @@ import {
   Mail, 
   Github,
   Linkedin,
-  Twitter,
-  ExternalLink
+  Twitter
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const creativeTexts = [
-  "Transformo ideas en experiencias digitales",
-  "Código que cobra vida, pixel a pixel",
-  "Construyendo el futuro, una línea a la vez",
-  "Donde la creatividad se encuentra con la tecnología"
+  "Especializado en arquitecturas escalables con Spring Boot y AWS",
+  "Desarrollo full-stack con código limpio y documentación detallada",
+  "De la idea al despliegue: soluciones end-to-end",
+  "Transformo problemas complejos en aplicaciones web escalables"
 ];
-
-
 
 interface CreativeHeroSectionProps {
   onOpenContactModal?: () => void;
@@ -83,9 +80,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
       />
       
       {/* Enhanced floating geometric shapes */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-      >
+      <motion.div className="absolute inset-0 pointer-events-none">
         {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
@@ -119,19 +114,19 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
         ))}
       </motion.div>
 
-      {/* Code snippets floating effect - Uniform distribution */}
+      {/* Code snippets floating effect */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {[
           {text: 'const', x: 120, y: 150},
-          {text: 'function', x: 320, y: 200},
-          {text: 'return', x: 520, y: 180},
-          {text: '<div>', x: 720, y: 160},
-          {text: '{}', x: 920, y: 190},
+          {text: 'Spring', x: 320, y: 200},
+          {text: 'AWS', x: 520, y: 180},
+          {text: '<React>', x: 720, y: 160},
+          {text: 'Node.js', x: 920, y: 190},
           {text: '=>', x: 1120, y: 170},
-          {text: 'async', x: 220, y: 400},
-          {text: 'await', x: 420, y: 420},
-          {text: 'useState', x: 620, y: 380},
-          {text: 'useEffect', x: 820, y: 410},
+          {text: 'Lambda', x: 220, y: 400},
+          {text: 'MySQL', x: 420, y: 420},
+          {text: 'Docker', x: 620, y: 380},
+          {text: 'API', x: 820, y: 410},
         ].map((item, i) => (
           <motion.div
             key={item.text}
@@ -160,12 +155,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
         ))}
       </div>
 
-      <motion.div 
-        className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
+      <motion.div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Holographic Profile Card */}
         <motion.div
           initial={{ scale: 0 }}
@@ -182,19 +172,9 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             transformStyle: "preserve-3d"
           }}
         >
-          {/* Card Container */}
           <motion.div
-            whileHover={{ 
-              scale: 1.05,
-              transition: {
-                duration: 0.3,
-                ease: "easeOut"
-              }
-            }}
-            className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-xl cursor-pointer card-holographic"
-            style={{
-              transformOrigin: "center center"
-            }}
+            whileHover={{ scale: 1.05 }}
+            className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-xl cursor-pointer"
             whileInView={{
               rotateX: [0, 10, 0, -10, 0],
               rotateY: [0, 15, 0, -15, 0],
@@ -206,13 +186,12 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
               ease: [0.6, 0.05, -0.01, 0.9]
             }}
           >
-            {/* Holographic Background with enhanced effects */}
+            {/* Holographic Background */}
             <motion.div
               className="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-500/30 via-purple-500/30 to-pink-500/30"
               style={{
                 backgroundSize: "400% 400%",
                 filter: "blur(4px)",
-                transformStyle: "preserve-3d",
                 transform: "translateZ(-10px)"
               }}
               animate={{
@@ -230,18 +209,13 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
 
             {/* Card Frame */}
             <div className="absolute inset-[2px] rounded-xl bg-slate-900/90 backdrop-blur-sm p-1 overflow-hidden">
-              {/* Enhanced Rainbow Border with 3D effect */}
+              {/* Rainbow Border */}
               <motion.div 
                 className="absolute inset-0 rounded-xl overflow-hidden"
-                style={{ transformStyle: "preserve-3d" }}
               >
                 <motion.div 
                   className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 opacity-50"
-                  style={{ 
-                    filter: "blur(4px)",
-                    transformStyle: "preserve-3d",
-                    transform: "translateZ(-5px)"
-                  }}
+                  style={{ filter: "blur(4px)" }}
                   animate={{
                     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
                     scale: [1, 1.1, 1]
@@ -254,31 +228,16 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
                 />
               </motion.div>
 
-              {/* Profile Image Container with Depth */}
-              <div 
-                className="relative w-full h-full rounded-lg overflow-hidden"
-                style={{ 
-                  transform: "translateZ(10px)"
-                }}
-              >
+              {/* Profile Image Container */}
+              <div className="relative w-full h-full rounded-lg overflow-hidden">
                 <img 
                   src="/images/ciro.PNG" 
-                  alt="CJ Vásquez" 
+                  alt="Ciro Vásquez" 
                   className="w-full h-full object-cover rounded-lg"
                 />
-
-                {/* Holographic Overlay */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10 animate-pulse-gradient"
-                />
-
-                {/* Scanline Effect */}
-                <div
-                  className="absolute inset-0 scanline-effect"
-                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-transparent to-purple-500/10 animate-pulse-gradient" />
               </div>
             </div>
-
           </motion.div>
         </motion.div>
 
@@ -301,7 +260,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
                 backgroundSize: "200% 200%"
               }}
             >
-              CJ Vásquez
+              Ciro Vásquez
             </motion.span>
           </h1>
         </motion.div>
@@ -337,7 +296,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
               duration: 0.5,
               ease: [0.4, 0, 0.2, 1]
             }}
-            className="text-xl sm:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-size-300 animate-gradient"
+            className="text-xl sm:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400"
           >
             {creativeTexts[currentText]}
           </motion.p>
@@ -354,7 +313,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             <div className="w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
             <span className="text-cyan-400 font-semibold">Desarrollador Full Stack</span>
             <div className="w-px h-6 bg-slate-600"></div>
-            <span className="text-slate-300">React • Node.js • TypeScript</span>
+            <span className="text-slate-300">Java • Spring Boot • Node.js • AWS</span>
           </div>
         </motion.div>
 
@@ -371,11 +330,10 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* Hover effect overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
             <span className="relative z-10 flex items-center space-x-2">
-              <span>Ver mi trabajo</span>
+              <span>Ver mis proyectos</span>
               <motion.div
                 animate={{ x: [0, 5, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
@@ -393,12 +351,13 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
           >
             <span className="flex items-center space-x-2">
               <Mail className="w-5 h-5 group-hover:animate-pulse" />
-              <span>Hablemos</span>
+              <span>Contáctame</span>
             </span>
           </motion.button>
           
-          <motion.button
-            onClick={() => window.open('#', '_blank')}
+          <motion.a
+            href="/CV-Ciro-Vasquez.pdf"
+            download="CV-Ciro-Vasquez.pdf"
             className="group px-8 py-4 glass-card text-slate-300 font-semibold rounded-xl hover:text-white transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -407,23 +366,24 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
               <Download className="w-5 h-5 group-hover:animate-bounce" />
               <span>Descargar CV</span>
             </span>
-          </motion.button>
+          </motion.a>
         </motion.div>
 
-        {/* Social Links */}
+        {/* Social Links - Botones verticales lado derecho */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4"
+          className="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40 hidden lg:flex"
         >
           <motion.a
             href="https://github.com/CJ-Vasquez"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 group"
             whileHover={{ x: -5 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="GitHub"
           >
             <Github className="w-6 h-6" />
           </motion.a>
@@ -431,9 +391,10 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             href="https://linkedin.com/in/cj-vasquez"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 group"
             whileHover={{ x: -5 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="LinkedIn"
           >
             <Linkedin className="w-6 h-6" />
           </motion.a>
@@ -441,21 +402,21 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             href="https://twitter.com/CJVasquezDev"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 group"
             whileHover={{ x: -5 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="Twitter"
           >
             <Twitter className="w-6 h-6" />
           </motion.a>
           <motion.a
-            href="https://cj-vasquez.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 hover:-translate-x-2"
+            href="mailto:ciro.vm92@gmail.com"
+            className="p-3 glass-card rounded-xl hover:text-cyan-400 text-slate-300 transition-all hover:scale-110 group"
             whileHover={{ x: -5 }}
             whileTap={{ scale: 0.95 }}
+            aria-label="Email"
           >
-            <ExternalLink className="w-6 h-6" />
+            <Mail className="w-6 h-6" />
           </motion.a>
         </motion.div>
 
@@ -476,7 +437,7 @@ export function CreativeHeroSection({ onOpenContactModal }: CreativeHeroSectionP
             className="flex flex-col items-center space-y-3 text-slate-400/80 hover:text-slate-300 transition-colors group cursor-pointer"
             onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            <span className="text-sm font-medium tracking-wide">Scroll para descubrir</span>
+            <span className="text-sm font-medium tracking-wide">Scroll para descubrir más</span>
             <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center group-hover:border-slate-300 transition-colors">
               <motion.div
                 animate={{ y: [0, 12, 0] }}

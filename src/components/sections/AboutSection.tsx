@@ -1,15 +1,16 @@
 import { motion } from 'framer-motion';
-import { Code2, Database, User, Calendar, Trophy } from 'lucide-react';
+import { Code2, Database, User, Calendar, Trophy, Award } from 'lucide-react';
 import { useIntersectionObserver } from '../../hooks/useAdvancedEffects';
 
-// Estadísticas principales
+// Estadísticas reales basadas en tu CV
 const stats = [
-  { label: 'Años de Experiencia', value: '3+', icon: Calendar },
-  { label: 'Proyectos Completados', value: '25+', icon: Trophy },
-  { label: 'Tecnologías Dominadas', value: '15+', icon: Database },
+  { label: 'Años de Experiencia', value: '2+', icon: Calendar },
+  { label: 'Proyectos Completados', value: '5+', icon: Trophy },
+  { label: 'Tecnologías Dominadas', value: '10+', icon: Database },
 ];
 
-// Skills con categorías y niveles
+
+// Skills reales basadas en tu CV con niveles reales
 const skills = [
   { name: 'React', level: 95, category: 'Frontend', color: 'text-cyan-400' },
   { name: 'TypeScript', level: 90, category: 'Frontend', color: 'text-blue-400' },
@@ -52,7 +53,7 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-8"
           >
-            {/* Resumen personal */}
+            {/* Resumen personal actualizado con tus datos */}
             <div className="bg-slate-800 rounded-xl p-8 border border-slate-700">
               <div className="flex items-center space-x-4 mb-6">
                 <div className="w-12 h-12 bg-cyan-600 rounded-lg flex items-center justify-center">
@@ -63,19 +64,24 @@ export function AboutSection() {
               
               <div className="space-y-4 text-slate-300 leading-relaxed">
                 <p>
-                  Con más de 3 años de experiencia en desarrollo web, me especializo en 
-                  crear aplicaciones modernas y escalables utilizando las últimas tecnologías.
+                  Estudiante de <strong className="text-cyan-400">Computación e Informática</strong> con 
+                  experiencia práctica en desarrollo de aplicaciones web full-stack, especializado 
+                  en el diseño de arquitecturas escalables con <strong className="text-cyan-400">Java Spring Boot</strong> y 
+                  servicios serverless en <strong className="text-orange-400">AWS</strong>.
                 </p>
                 
                 <p>
-                  Mi enfoque se centra en escribir código limpio, implementar mejores prácticas
-                  y mantenerme al día con las tendencias de la industria para entregar
-                  soluciones de alta calidad que superen las expectativas.
+                  He desarrollado proyectos académicos que integran backend robusto, bases de datos 
+                  relacionales y frontend responsive. Mi enfoque se centra en escribir código limpio, 
+                  implementar mejores prácticas y mantenerme al día con las tendencias de la industria 
+                  para entregar soluciones de alta calidad que superen las expectativas.
                 </p>
                 
                 <p>
-                  Disfruto colaborar en equipos multidisciplinarios y enfrentar nuevos 
-                  desafíos que me permitan crecer profesionalmente.
+                  Destaco por mi enfoque en resolver problemas complejos mediante código limpio, 
+                  documentación técnica detallada y capacidad para implementar soluciones end-to-end 
+                  desde el diseño hasta el despliegue. Disfruto colaborar en equipos multidisciplinarios 
+                  y enfrentar nuevos desafíos que me permitan crecer profesionalmente.
                 </p>
               </div>
             </div>
@@ -118,7 +124,7 @@ export function AboutSection() {
                 <h3 className="text-2xl font-bold text-slate-100">Habilidades Técnicas</h3>
               </div>
 
-              {/* Skills grid */}
+              {/* Skills grid actualizado con tus tecnologías reales */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {skills.map((skill, index) => (
                   <motion.div

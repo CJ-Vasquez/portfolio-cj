@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { 
   Coffee, 
-  Camera, 
+  Puzzle,
   Gamepad2, 
   Music, 
   Mountain, 
@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { useIntersectionObserver } from '../../hooks/useAdvancedEffects';
 
-// Datos personales únicos y auténticos
+// Datos personales únicos y auténticos - ACTUALIZADOS CON TUS DATOS REALES
 const personalFacts = [
   {
     icon: Coffee,
@@ -21,21 +21,21 @@ const personalFacts = [
     color: "from-amber-500 to-orange-600"
   },
   {
-    icon: Camera,
-    title: "📸 Fotógrafo urbano",
-    description: "Capturo la esencia de las ciudades en mis viajes. Mi Instagram tiene más fotos que código.",
+    icon: Puzzle,
+    title: "🧩 Maestro de rompecabezas",
+    description: "Desafío mi mente con rompecabezas complejos. La paciencia y estrategia son mi fuerte.",
     color: "from-purple-500 to-pink-600"
   },
   {
     icon: Gamepad2,
-    title: "🎮 Gaming nostálgico",
-    description: "Desde los 8-bits hasta los indie modernos. Actualmente obsesionado con roguelikes.",
+    title: "🎮 Estratega en Dota 2",
+    description: "Jugador apasionado de Dota 2 y juegos de estrategia. La táctica y el trabajo en equipo son clave.",
     color: "from-green-500 to-emerald-600"
   },
   {
     icon: Music,
     title: "🎵 Melómano ecléctico",
-    description: "De jazz clásico a synthwave. Programo mejor con lo-fi hip hop de fondo.",
+    description: "De música electrónica a cumbia peruana. Mi playlist es tan diversa como mi stack tecnológico.",
     color: "from-blue-500 to-indigo-600"
   },
   {
@@ -67,7 +67,7 @@ const quirkyStats = [
   },
   { 
     icon: Plane, 
-    value: "23", 
+    value: "12", 
     label: "Ciudades visitadas",
     description: "Cada viaje inspira nuevos proyectos" 
   },
@@ -86,11 +86,11 @@ const funTimeline = [
     description: "En Python, obviamente. Fue amor a primera compilación.",
     emoji: "💻"
   },
-  {
+ {
     year: "2020",
-    event: "Primer proyecto real",
-    description: "Un calculadora de propinas que nadie usó, pero yo estaba orgulloso.",
-    emoji: "🚀"
+    event: "Primeros pasos en código",
+    description: "Comencé mi viaje autodidacta. HTML, CSS y JavaScript fueron mis primeros compañeros.",
+    emoji: "💻"
   },
   {
     year: "2021",
@@ -100,20 +100,38 @@ const funTimeline = [
   },
   {
     year: "2022",
-    event: "Primer trabajo tech",
-    description: "De estudiante a profesional. Síndrome del impostor incluido gratuitamente.",
-    emoji: "💼"
+    event: "Backend con Java",
+    description: "Aprendí Spring Boot y arquitecturas MVC. El poder del backend me fascinó.",
+    emoji: "☕"
   },
   {
     year: "2023",
-    event: "Líder de equipo",
-    description: "Ahora ayudo a otros a evitar mis errores de principiante.",
-    emoji: "👥"
+    event: "Bases de datos y APIs",
+    description: "MySQL, MongoDB y arquitecturas RESTful. Conectando frontend con backend de forma elegante.",
+    emoji: "🗄️"
   },
   {
-    year: "2024",
+    year: "Ene 2024",
+    event: "Proyectos móviles y Docker",
+    description: "Exploré Android Studio, Flutter y contenerización. La versatilidad es clave.",
+    emoji: "📱"
+  },
+  {
+    year: "Jul 2024",
+    event: "Sistema de Control Aviar",
+    description: "Next.js + React en producción. SSR, SSG y arquitectura moderna en acción.",
+    emoji: "🦅"
+  },
+  {
+    year: "Sep 2024",
+    event: "Conect-Arte y Clínica More Salud",
+    description: "Serverless AWS + Spring Boot. Arquitecturas escalables para proyectos ambiciosos.",
+    emoji: "🏗️"
+  },
+  {
+    year: "2025",
     event: "Este portafolio",
-    description: "Mi declaración de amor al diseño y desarrollo moderno.",
+    description: "Mi declaración de amor al diseño y desarrollo moderno. El siguiente nivel.",
     emoji: "🎨"
   }
 ];
@@ -157,7 +175,7 @@ export function PersonalSection() {
             Más allá del código
           </motion.h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Porque los mejores desarrolladores también son <strong>humanos interesantes</strong> 
+            Porque los mejores desarrolladores también son <strong>humanos interesantes</strong> <p></p> 
             con historias que contar y pasiones que los impulsan.
           </p>
         </motion.div>

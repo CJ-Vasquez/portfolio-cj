@@ -1,10 +1,8 @@
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { usePortfolio } from '../../context/PortfolioContext';
 
 export function ScrollProgress() {
-  const { state } = usePortfolio();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -104,30 +102,17 @@ export function ScrollProgress() {
         </motion.div>
       </div>
 
-      {/* Section Indicators */}
+      {/* ELIMINADO: Section Indicators (los botones pequeños grises/cyan) */}
+      {/* 
       <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-40">
         <div className="space-y-4">
           {['hero', 'about', 'experience', 'projects', 'contact'].map((section, index) => (
-            <motion.button
-              key={section}
-              onClick={() => {
-                document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                state.activeSection === section
-                  ? 'bg-gradient-to-r from-cyan-400 to-purple-600 scale-125'
-                  : 'bg-gray-600 hover:bg-gray-500'
-              }`}
-              whileHover={{ scale: 1.3 }}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <span className="sr-only">{section}</span>
+            <motion.button ... >
             </motion.button>
           ))}
         </div>
       </div>
+      */}
     </>
   );
 }

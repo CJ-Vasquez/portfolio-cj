@@ -16,67 +16,49 @@ interface Project {
   featured?: boolean;
 }
 
-// Datos de proyectos
+// Datos de proyectos - TUS PROYECTOS REALES DEL CV
 const projects: Project[] = [
   {
     id: 1,
-    title: 'E-Commerce Platform',
-    description: 'Plataforma completa de comercio electrónico con panel de administración, gestión de inventario y pasarela de pagos integrada.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop&auto=format',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Docker'],
+    title: 'Conect-Arte',
+    description: 'Plataforma web para conectar artistas con clientes, implementando arquitectura de tres roles (administrador, artista, cliente) con sistema de autenticación completo.',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&auto=format',
+    technologies: ['Node.js', 'AWS Lambda', 'API Gateway', 'MySQL', 'DynamoDB', 'Thymeleaf', 'Bootstrap'],
     category: 'fullstack',
-    githubUrl: 'https://github.com/username/ecommerce',
-    demoUrl: 'https://demo.example.com',
+    githubUrl: 'https://github.com/CJ-Vasquez/conect-arte',
+    demoUrl: 'https://conect-arte.vercel.app',
     featured: true,
   },
   {
     id: 2,
-    title: 'Task Management App',
-    description: 'Aplicación móvil de gestión de tareas con colaboración en tiempo real y sincronización en la nube.',
-    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop&auto=format',
-    technologies: ['React Native', 'Firebase', 'TypeScript'],
-    category: 'mobile',
-    githubUrl: 'https://github.com/username/task-app',
+    title: 'Clínica More Salud',
+    description: 'Sistema web de gestión clínica con arquitectura MVC utilizando Java Spring Boot y Maven. Dashboard administrativo con vistas CRUD completas.',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop&auto=format',
+    technologies: ['Java', 'Spring Boot', 'Maven', 'MySQL', 'Thymeleaf', 'Bootstrap', 'JPA'],
+    category: 'fullstack',
+    githubUrl: 'https://github.com/CJ-Vasquez/clinica-more-salud',
+    demoUrl: 'https://clinica-more-salud.vercel.app',
     featured: true,
   },
   {
     id: 3,
-    title: 'Weather Dashboard',
-    description: 'Dashboard interactivo del clima con mapas en tiempo real, pronósticos detallados y alertas meteorológicas.',
-    image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop&auto=format',
-    technologies: ['Vue.js', 'D3.js', 'API Weather', 'Mapbox'],
-    category: 'web',
-    githubUrl: 'https://github.com/username/weather',
-    demoUrl: 'https://weather-demo.example.com',
+    title: 'Sistema de Control Aviar',
+    description: 'Aplicación web moderna para gestión y control de producción avícola utilizando Next.js con React. Optimización SSR y SSG con interfaces intuitivas.',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=400&fit=crop&auto=format',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'REST APIs', 'Context API'],
+    category: 'frontend',
+    githubUrl: 'https://github.com/CJ-Vasquez/control-aviar',
+    demoUrl: 'https://control-aviar.vercel.app',
   },
   {
     id: 4,
-    title: 'Portfolio Website',
-    description: 'Sitio web personal con animaciones avanzadas, diseño responsivo y optimización SEO.',
-    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop&auto=format',
-    technologies: ['Next.js', 'Framer Motion', 'Tailwind CSS'],
-    category: 'frontend',
-    githubUrl: 'https://github.com/username/portfolio',
-    demoUrl: 'https://portfolio.example.com',
-  },
-  {
-    id: 5,
-    title: 'Social Media App',
-    description: 'Red social con chat en tiempo real, compartir contenido multimedia y sistema de notificaciones.',
-    image: 'https://images.unsplash.com/photo-1611262588024-d12430b98920?w=600&h=400&fit=crop&auto=format',
-    technologies: ['React', 'Socket.io', 'MongoDB', 'Express'],
-    category: 'fullstack',
-    githubUrl: 'https://github.com/username/social-app',
-  },
-  {
-    id: 6,
-    title: 'Fitness Tracker',
-    description: 'Aplicación de seguimiento de ejercicios con integración de wearables y análisis de datos.',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop&auto=format',
-    technologies: ['Flutter', 'Firebase', 'HealthKit', 'Charts.js'],
+    title: 'Proyectos Móviles',
+    description: 'Desarrollo de aplicaciones móviles con Android Studio y exploración de Flutter SDK. Implementación de soluciones con Docker para contenerización.',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop&auto=format',
+    technologies: ['Android Studio', 'Flutter', 'Docker', 'GitHub'],
     category: 'mobile',
-    githubUrl: 'https://github.com/username/fitness-tracker',
-  }
+    githubUrl: 'https://github.com/CJ-Vasquez',
+  },
 ];
 
 // Categorías para filtros
@@ -181,6 +163,7 @@ export function ProjectsSection() {
                         className="p-3 bg-slate-800/80 text-white rounded-full hover:bg-slate-700 transition-colors"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
+                        aria-label="Ver código en GitHub"
                       >
                         <Github className="w-5 h-5" />
                       </motion.a>
@@ -193,6 +176,7 @@ export function ProjectsSection() {
                         className="p-3 bg-cyan-600/80 text-white rounded-full hover:bg-cyan-700 transition-colors"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
+                        aria-label="Ver demo en vivo"
                       >
                         <ExternalLink className="w-5 h-5" />
                       </motion.a>
@@ -201,7 +185,7 @@ export function ProjectsSection() {
 
                   {/* Badge de destacado */}
                   {project.featured && (
-                    <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs font-semibold rounded-full">
+                    <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-cyan-500 to-purple-500 text-white text-xs font-semibold rounded-full shadow-lg">
                       Destacado
                     </div>
                   )}
@@ -213,7 +197,7 @@ export function ProjectsSection() {
                     {project.title}
                   </h3>
                   
-                  <p className="text-slate-300 mb-4 leading-relaxed">
+                  <p className="text-slate-300 mb-4 leading-relaxed text-sm">
                     {project.description}
                   </p>
 
@@ -222,7 +206,7 @@ export function ProjectsSection() {
                     {project.technologies.map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 bg-slate-700 text-cyan-400 rounded-full text-xs font-medium border border-slate-600"
+                        className="px-3 py-1 bg-slate-700 text-cyan-400 rounded-full text-xs font-medium border border-slate-600 hover:bg-slate-600 hover:border-cyan-500 transition-all duration-200"
                       >
                         {tech}
                       </span>
@@ -234,6 +218,19 @@ export function ProjectsSection() {
           ))}
         </motion.div>
 
+        {/* Empty state cuando no hay proyectos filtrados */}
+        {filteredProjects.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-20"
+          >
+            <p className="text-slate-400 text-lg">
+              No hay proyectos en esta categoría todavía.
+            </p>
+          </motion.div>
+        )}
+
         {/* Call to action */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -244,14 +241,27 @@ export function ProjectsSection() {
           <p className="text-slate-300 mb-6">
             ¿Quieres ver más proyectos o colaborar en algo nuevo?
           </p>
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-700 hover:to-purple-700 transition-all duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Hablemos
-          </motion.a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.a
+              href="#contact"
+              className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-cyan-600 to-purple-600 text-white font-semibold rounded-lg hover:from-cyan-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Hablemos
+            </motion.a>
+            <motion.a
+              href="https://github.com/CJ-Vasquez"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold rounded-lg border border-slate-700 hover:border-cyan-500 transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Github className="w-5 h-5" />
+              Ver todos en GitHub
+            </motion.a>
+          </div>
         </motion.div>
       </div>
     </section>

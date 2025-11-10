@@ -3,52 +3,52 @@ import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-rea
 import { useState } from 'react';
 import { useIntersectionObserver } from '../../hooks/useAdvancedEffects';
 
-// Información de contacto
+// Información de contacto - TUS DATOS REALES DEL CV
 const contactInfo = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'hola@tudominio.com',
-    href: 'mailto:hola@tudominio.com',
+    value: 'ciro.vm92@gmail.com',
+    href: 'mailto:ciro.vm92@gmail.com',
   },
   {
     icon: Phone,
     label: 'Teléfono',
-    value: '+34 123 456 789',
-    href: 'tel:+34123456789',
+    value: '+51 933 055 687',
+    href: 'tel:+51933055687',
   },
   {
     icon: MapPin,
     label: 'Ubicación',
-    value: 'Madrid, España',
+    value: 'Lima, Perú',
     href: '#',
   },
 ];
 
-// Redes sociales
+// Redes sociales - TUS ENLACES REALES
 const socialMedia = [
   {
     icon: Github,
     label: 'GitHub',
-    href: 'https://github.com/usuario',
+    href: 'https://github.com/CJ-Vasquez',
     color: 'hover:text-gray-400',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    href: 'https://linkedin.com/in/usuario',
+    href: 'https://linkedin.com/in/cj-vasquez',
     color: 'hover:text-blue-400',
   },
   {
     icon: Twitter,
     label: 'Twitter',
-    href: 'https://twitter.com/usuario',
+    href: 'https://twitter.com/CJVasquezDev',
     color: 'hover:text-sky-400',
   },
   {
     icon: Mail,
     label: 'Email',
-    href: 'mailto:hola@tudominio.com',
+    href: 'mailto:ciro.vm92@gmail.com',
     color: 'hover:text-red-400',
   },
 ];
@@ -155,7 +155,7 @@ export function ContactSection() {
                 Sígueme en Redes
               </h3>
               
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-4">
                 {socialMedia.map((social, index) => {
                   const Icon = social.icon;
                   return (
@@ -268,7 +268,7 @@ export function ContactSection() {
                   className={`w-full flex items-center justify-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                     isSubmitting
                       ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-cyan-600 to-purple-600 text-white hover:from-cyan-700 hover:to-purple-700'
+                      : 'bg-gradient-to-r from-cyan-600 to-purple-600 text-white hover:from-cyan-700 hover:to-purple-700 shadow-lg hover:shadow-cyan-500/25'
                   }`}
                   whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                   whileTap={!isSubmitting ? { scale: 0.98 } : {}}
